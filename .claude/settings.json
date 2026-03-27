@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": ["Bash(rg *)"]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash -c 'node \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)dist/index.js\"'"
+  },
+  "enabledPlugins": {
+    "osgrep@osgrep": true,
+    "claude-hud@claude-hud": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "understand-anything@understand-anything": true
+  },
+  "extraKnownMarketplaces": {
+    "understand-anything": {
+      "source": {
+        "source": "github",
+        "repo": "Lum1104/Understand-Anything"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "spinnerVerbs": {
+    "mode": "append",
+    "verbs": ["Putting the Brazilian sauce", "Brazilian.building"]
+  }
+}

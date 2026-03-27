@@ -1,0 +1,4 @@
+osgrep@osgrep 0.4.3
+claude-hud@claude-hud 0.0.2
+clangd-lsp@claude-plugins-official 1.0.0
+understand-anything@understand-anything 1.0.5
