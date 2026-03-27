@@ -1,0 +1,511 @@
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+%                           PACKAGES                                 %
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+% shut up, warnings
+\usepackage{sectsty}
+\let\underbar\relax
+\usepackage{silence}
+\WarningFilter*{hyperref}{Token not allowed in a PDF string}
+\WarningsOff[caption]
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{makecell}
+\usepackage{lipsum}
+\usepackage{algorithm}
+\usepackage{minted}
+\usepackage{algpseudocode}
+\usepackage{upquote}
+%\usepackage[titlenumbered,ruled,noend,algo2e]{algorithm2e}
+\usepackage{url}
+\usepackage{placeins}
+\usepackage{booktabs}
+\usepackage{soul} % strikethrough, underline, highlight
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+%\usepackage[numbers]{natbib}
+\usepackage{proba} % \P, \E, \Var, etc.
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{rotating}
+\usepackage{etoolbox}
+\usepackage{xparse}
+\usepackage{grffile}
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{euscript}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{tablefootnote}
+\usepackage[flushleft]{threeparttable}
+\usepackage{multirow}
+\usepackage[title]{appendix}
+\usepackage{arydshln}
+\usepackage{array, booktabs}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{dsfont} % \mathds for blackboard bold
+\usepackage{amsmath,amsthm}
+\usepackage{balance}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage{pdfpages}
+\usepackage{braket}
+\usepackage[normalem]{ulem} % normalem so \emph stays italic
+\usepackage{bbding}
+\usepackage[capitalise,noabbrev]{cleveref}
+\usepackage{xfrac}
+\usepackage[usestackEOL]{stackengine}
+\usepackage{indentfirst}
+\usepackage{csquotes}
+\usepackage{pgf}
+\usepackage{varwidth}
+\usepackage{verbatimbox}
+\usepackage{verbatim}
+\usepackage{bm}
+\usepackage{pythonhighlight}
+\usepackage[listings]{tcolorbox} % fancy boxes
+\tcbuselibrary{breakable, listings, skins}
+\usepackage[framemethod=default]{mdframed} % simpler boxes
+
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+%                           CAPTION SETTINGS                         %
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+
+% keep captions readable, not giant
+\captionsetup{font=small}
+\captionsetup[sub]{font=small}
+\captionsetup[subfigure]{labelformat = parens, labelsep = space, font = small}
+% shortcuts for subfigure references in caption text
+\newcommand{\figleft}{{\em (Left)}}
+\newcommand{\figcenter}{{\em (Center)}}
+\newcommand{\figright}{{\em (Right)}}
+\newcommand{\figtop}{{\em (Top)}}
+\newcommand{\figbottom}{{\em (Bottom)}}
+\newcommand{\captiona}{{\em (a)}}
+\newcommand{\captionb}{{\em (b)}}
+\newcommand{\captionc}{{\em (c)}}
+\newcommand{\captiond}{{\em (d)}}
+
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+%                         COLOR MACROS                               %
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+
+\definecolor{pastelblue}{RGB}{76,113,175}
+\definecolor{pastelgreen}{rgb}{0.8, 1.0, 0.8}
+\definecolor{pastelred}{rgb}{1.0, 0.8, 0.8}
+\definecolor{pastelgrey}{RGB}{230,230,230}
+\definecolor{pastelbeige}{RGB}{243,236,221}
+\definecolor{pastelpurple}{RGB}{154,139,192}
+\definecolor{salmon}{RGB}{250, 128, 114}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\definecolor{darkred}{rgb}{0.5,0,0}
+\definecolor{verylightgreen}{HTML}{F6FFF9}
+\definecolor{verylightred}{HTML}{FFF4F3}
+\definecolor{verylightgray}{HTML}{F4F6F6}
+\definecolor{navyblue}{HTML}{473992}
+\definecolor{redorange}{HTML}{ED135A}
+\definecolor{babyblueeyes}{rgb}{0.63, 0.79, 0.95}
+\definecolor{lightpink}{rgb}{1.00, 0.714, 0.757}
+\definecolor{peach}{rgb}{1.0, 0.9, 0.71}
+\definecolor{pastelpink}{rgb}{1.0, 0.82, 0.86}
+\definecolor{deepchampagne}{rgb}{0.98, 0.84, 0.65}
+
+% green/red inline highlight shorthands
+\newcommand{\gb}[1]{\colorbox{pastelgreen}{#1}}
+\newcommand{\rb}[1]{\colorbox{pastelred}{#1}}
+
+
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+%                           TIKZ MACROS                              %
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+\usepackage{tikzpeople} % stick figures in DAGs
+\usetikzlibrary{shapes,decorations,arrows,calc,arrows.meta,fit,positioning}
+
+% default DAG style — causal graph convention
+\tikzset{
+    -Latex,auto,node distance =1 cm and 1 cm,semithick,
+    state/.style ={ellipse, draw, minimum width = 0.7 cm},
+    point/.style = {circle, draw, inner sep=0.04cm,fill,node contents={}},
+    bidirected/.style={Latex-Latex,dashed},
+    el/.style = {inner sep=2pt, align=left, sloped}
+}
+
+% Warning symbol
+\newcommand\Warning{%
+ \makebox[1.4em][c]{%
+ \makebox[0pt][c]{\raisebox{.1em}{\small!}}%
+ \makebox[0pt][c]{\color{red}\Large$\bigtriangleup$}}}%
+
+%                    LATIN JARGONS & TEXT HELPERS                     %
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+
+\def\eg{\textit{e.g.}, }
+\def\ie{\textit{i.e.}, }
+\def\etc{\textit{et cetera}}
+\def\cf{\textit{cf.}\ }
+
+% Annotation and editing helpers
+\renewcommand{\paragraph}[1]{{~\\
+\noindent \textbf{#1.}}} % tighter paragraph spacing
+\newcommand{\Appendix}{supplement\xspace}
+\newcommand{\todo}[1]{{\color{red}[\textbf{TODO:} #1]}}
+\newcommand{\leo}[1]{{\color{blue}[Leo:#1]}}
+\newcommand{\citehere}[0]{{\color{red}
+$^{\text{cite}}$}} % "will cite later" marker
+
+% Text box
+
+\newcommand{\centertikztextbox}[2]{{
+\begin{tikzpicture}
+\node[draw, align=center,fill=#1,thick](3) at (0,0) {
+\begin{varwidth}{0.9\linewidth}
+#2
+\end{varwidth}
+};
+\end{tikzpicture}
+}
+}
+
+\newcommand{\tikztextbox}[2]{{
+\begin{flushleft}
+\begin{tikzpicture}
+\node[draw, align=left,fill=#1,thick](3) at (0,0) {
+\begin{varwidth}{0.9\linewidth}
+#2
+\end{varwidth}
+};
+\end{tikzpicture}
+\end{flushleft}
+}
+}
+% Dashed version
+\newcommand{\dashedtikztextbox}[3]{{
+\begin{flushleft}
+\begin{tikzpicture}
+\hspace{#2}
+\node[draw, align=left,fill=#1, thick, dashed](3) at (0,0) {
+\begin{varwidth}{0.9\linewidth}
+#3
+\end{varwidth}
+};
+\end{tikzpicture}
+\end{flushleft}
+}
+}
+
+% Arrow: [ style arguments, eat up, eat down, move right ]
+\newcommand{\tikzarrow}[4]{{
+\vspace{-#2}
+\begin{flushleft}
+\begin{tikzpicture}
+\hspace{#4}
+\node[align=left](1) at (0,0) {
+\begin{varwidth}{0.9\linewidth}
+\end{varwidth}
+};
+\node[align=left](2) at (0,-1.5) {
+\begin{varwidth}{0.9\linewidth}
+\end{varwidth}
+};
+\path[#1,thick] (1) edge (2);
+\end{tikzpicture}
+\end{flushleft}
+\vspace{-#3}
+}
+}
+
+%Green check
+\newcommand{\greencheck}{}%
+\DeclareRobustCommand{\greencheck}{%
+  \tikz\fill[scale=0.5, color=pastelgreen]
+  (0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;
+
+
+% This is how you draw a graph in text:
+\usetikzlibrary{shapes.misc}
+\newcommand*{\graphdraw}{{\scriptsize
+		\tikz[scale=0.1]{
+			%%% edges
+			\draw[thin] (2,0) -- (0,0) -- (0,2) -- (2,2);
+			%% vertices
+			\draw[fill=blue,draw=blue] (0,0) circle (12pt);
+			\draw[fill=red,draw=red] (0,2) circle (12pt);
+			\draw[fill=darkgreen,draw=darkgreen] (2,2) circle (12pt);
+			\draw[fill=blue,draw=blue] (2,0) circle (12pt);
+		}
+}}}
+
+
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+%                         THEOREM ENVIRONMENTS                       %
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{assumption}{Assumption}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{fact}{Fact}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+\newtheorem{definition}{Definition}
+\newtheorem{exercise}{Exercise}
+\newtheorem{example}{Example}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{property}{Property}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newtheorem{motivation}{Motivation}
+\newtheorem{query}{Query}
+\newtheorem{observation}{Observation}
+% Let cleveref and thmtools work together
+\makeatletter
+\def\thmt@refnamewithcomma #1#2#3,#4,#5\@nil{%
+	\@xa\def\csname\thmt@envname #1utorefname\endcsname{#3}%
+	\ifcsname #2refname\endcsname
+	\csname #2refname\expandafter\endcsname\expandafter{\thmt@envname}{#3}{#4}%
+	\fi}
+\makeatother
+\Crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{fact}{Fact}{Facts}
+\Crefname{definition}{Definition}{Definitions}
+\Crefname{observation}{Observation}{Observations}
+\Crefname{assumption}{Assumption}{Assumptions}
+\Crefname{axiom}{Axiom}{Axioms}
+\Crefname{case}{Case}{Cases}
+\Crefname{claim}{Claim}{Claims}
+\Crefname{conclusion}{Conclusion}{Conclusions}
+\Crefname{condition}{Condition}{Conditions}
+\Crefname{criterion}{Criterion}{Criteria}
+\Crefname{exercise}{Exercise}{Exercises}
+\Crefname{example}{Example}{Examples}
+\Crefname{notation}{Notation}{Notations}
+\Crefname{problem}{Problem}{Problems}
+\Crefname{property}{Property}{Properties}
+\Crefname{remark}{Remark}{Remarks}
+\Crefname{solution}{Solution}{Solutions}
+\Crefname{summary}{Summary}{Summaries}
+\Crefname{motivation}{Motivation}{Motivations}
+\Crefname{query}{Query}{Queries}
+
+% Styled boxes for prompts and callouts
+\newtcblisting[auto counter, list inside=examplelist,Crefname={Prompt}{Prompts}]{prompt}[3][]{%
+        colback=peach!50, colbacktitle=deepchampagne, coltitle=black,
+        arc=0pt, titlerule=0, toptitle=2pt, bottomtitle=2pt,
+        fonttitle=\bfseries,
+        title={\small Prompt~\thetcbcounter:~#3},
+        boxrule=0pt, opacityframe=0,
+        listing only,
+        label={#2},
+        fontupper=\small,
+        listing options={basicstyle=\ttfamily\small, breaklines=true},
+        #1
+}
+
+\newmdenv[
+  linecolor=black,
+  linewidth=0.pt,
+  roundcorner=10pt,
+  backgroundcolor=customred!30,
+]{attentionbox}
+
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+%                           MATH MACROS                              %
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+% general math ops
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\newcommand{\one}{\mathds{1}} % indicator
+\newcommand{\negquad}{\mkern-18mu}
+\newcommand{\red}[1]{{\color{red} #1}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\newcommand*\dbar[1]{\overline{\overline{\lower0.2ex\hbox{$#1$}}}}
+\newcommand{\supp}{\text{supp\xspace}}
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\dom}{\text{dom}}
+\newcommand{\ran}{\text{ran}}
+\newcommand{\setsize}[1]{\mid \! #1 \! \mid}
+\newcommand{\norm}[1]{\mid\!\mid \! #1 \! \mid\!\mid}
+\def\th{^{\text{th}}}
+% stats — distributions, divergences, independence
+\newcommand{\KL}{D_{\mathrm{KL}}}
+\newcommand{\pr}{P}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\eqdist}{\stackrel{d}{=}}
+\newcommand{\eqas}{\stackrel{\text{a.s.}}{=}}
+\newcommand{\standarderror}{\mathrm{SE}}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\newcommand{\dtv}[0]{d_{\mathrm{TV}}}
+\newcommand{\dkl}[0]{d_{\mathrm{KL}}}
+\newcommand\bdot[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}}
+% do-calculus essentials
+\newcommand{\doop}{\text{do}}
+\newcommand{\Parents}{\text{Pa}}
+\newcommand{\parents}{\text{pa}}
+% graph theory
+\newcommand{\iso}{\cong}
+\newcommand{\notiso}{\not cong}
+\newcommand{\aut}[1]{\text{Aut}(#1)}
+% ML shorthands — saves typing in equations
+\newcommand{\lr}{\alpha}
+\newcommand{\reg}{\lambda}
+\newcommand{\lf}{\mathcal{L}}
+\newcommand{\sigmoid}{\sigma}
+\newcommand{\softplus}{\zeta}
+\newcommand{\relu}{\text{ReLU}}
+% calligraphic alphabet — \cA through \cZ
+\def\cA{{\mathcal{A}}}
+\def\cB{{\mathcal{B}}}
+\def\cC{{\mathcal{C}}}
+\def\cD{{\mathcal{D}}}
+\def\cE{{\mathcal{E}}}
+\def\cF{{\mathcal{F}}}
+\def\cG{{\mathcal{G}}}
+\def\cH{{\mathcal{H}}}
+\def\cI{{\mathcal{I}}}
+\def\cJ{{\mathcal{J}}}
+\def\cK{{\mathcal{K}}}
+\def\cL{{\mathcal{L}}}
+\def\cM{{\mathcal{M}}}
+\def\cN{{\mathcal{N}}}
+\def\cO{{\mathcal{O}}}
+\def\cP{{\mathcal{P}}}
+\def\cQ{{\mathcal{Q}}}
+\def\cR{{\mathcal{R}}}
+\def\cS{{\mathcal{S}}}
+\def\cT{{\mathcal{T}}}
+\def\cU{{\mathcal{U}}}
+\def\cV{{\mathcal{V}}}
+\def\cW{{\mathcal{W}}}
+\def\cX{{\mathcal{X}}}
+\def\cY{{\mathcal{Y}}}
+\def\cZ{{\mathcal{Z}}}
+% bold alphabet — \bA through \bZ, \ba through \bz
+\def\bA{{\textbf{A}}}
+\def\bB{{\textbf{B}}}
+\def\bC{{\textbf{C}}}
+\def\bD{{\textbf{D}}}
+\def\bE{{\textbf{E}}}
+\def\bF{{\textbf{F}}}
+\def\bG{{\textbf{G}}}
+\def\bH{{\textbf{H}}}
+\def\bI{{\textbf{I}}}
+\def\bJ{{\textbf{J}}}
+\def\bK{{\textbf{K}}}
+\def\bL{{\textbf{L}}}
+\def\bM{{\textbf{M}}}
+\def\bN{{\textbf{N}}}
+\def\bO{{\textbf{O}}}
+\def\bP{{\textbf{P}}}
+\def\bQ{{\textbf{Q}}}
+\def\bR{{\textbf{R}}}
+\def\bS{{\textbf{S}}}
+\def\bT{{\textbf{T}}}
+\def\bU{{\textbf{U}}}
+\def\bV{{\textbf{V}}}
+\def\bW{{\textbf{W}}}
+\def\bX{{\textbf{X}}}
+\def\bY{{\textbf{Y}}}
+\def\bZ{{\textbf{Z}}}
+\def\ba{{\textbf{a}}}
+\def\bb{{\textbf{b}}}
+\def\bc{{\textbf{c}}}
+\def\bd{{\textbf{d}}}
+\def\be{{\textbf{e}}}
+\def\bbf{{\textbf{f}}}
+\def\bg{{\textbf{g}}}
+\def\bh{{\textbf{h}}}
+\def\bi{{\textbf{i}}}
+\def\bj{{\textbf{j}}}
+\def\bk{{\textbf{k}}}
+\def\bl{{\textbf{l}}}
+\def\bbm{{\textbf{m}}}
+\def\bn{{\textbf{n}}}
+\def\bo{{\textbf{o}}}
+\def\bp{{\textbf{p}}}
+\def\bq{{\textbf{q}}}
+\def\br{{\textbf{r}}}
+\def\bs{{\textbf{s}}}
+\def\bt{{\textbf{t}}}
+\def\bu{{\textbf{u}}}
+\def\bv{{\textbf{v}}}
+\def\bw{{\textbf{w}}}
+\def\bx{{\textbf{x}}}
+\def\by{{\textbf{y}}}
+\def\bz{{\textbf{z}}}
+% multiset braces: \lms x \rms → {{x}}
+\newcommand*{\lms}{\{\mskip-5mu\{}
+\newcommand*{\rms}{\}\mskip-5mu\}}
+
+
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+%                         MATH FONT COMMANDS                         %
+% -===============                                    ===============%
+% -===============                                    ===============%
+% -===============                                    ===============%
+
+% BOONDOX calligraphic — nicer than default \mathcal
+\DeclareFontFamily{U}{BOONDOX-calo}{\skewchar\font=45 }
+\DeclareFontShape{U}{BOONDOX-calo}{m}{n}{
+  <-> s*[1.05] BOONDOX-r-calo}{}
+\DeclareFontShape{U}{BOONDOX-calo}{b}{n}{
+  <-> s*[1.05] BOONDOX-b-calo}{}
+\DeclareMathAlphabet{\mathcalb}{U}{BOONDOX-calo}{m}{n}
+\SetMathAlphabet{\mathcalb}{bold}{U}{BOONDOX-calo}{b}{n}
+\DeclareMathAlphabet{\mathbcalb}{U}{BOONDOX-calo}{b}{n}
+\newcommand{\sff}[1]{ \text{ {\sffamily \textbf{  {#1} }} } }
+\newcommand{\ecal}[1]{ \EuScript{#1} }
+
+% hyperref chokes on these in PDF metadata
+\pdfstringdefDisableCommands{%
+  \def\\{}%
+  \def\texttt#1{<#1>}%
+}
+
