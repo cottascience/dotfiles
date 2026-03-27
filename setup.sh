@@ -13,16 +13,18 @@ info() { echo -e "${GREEN}[+]${RESET} $1"; }
 warn() { echo -e "${YELLOW}[!]${RESET} $1"; }
 error() { echo -e "${RED}[x]${RESET} $1"; }
 
-link() {
+copy_file() {
     local src="$1" dst="$2"
-    if [ -L "$dst" ]; then
-        rm "$dst"
-    elif [ -e "$dst" ]; then
-        warn "Backing up existing $dst → ${dst}.bak"
-        mv "$dst" "${dst}.bak"
-    fi
-    ln -sf "$src" "$dst"
-    info "Linked $dst"
+    mkdir -p "$(dirname "$dst")"
+    cp "$src" "$dst"
+    info "Copied $dst"
+}
+
+copy_dir() {
+    local src="$1" dst="$2"
+    mkdir -p "$dst"
+    rsync -a "$src/" "$dst/"
+    info "Synced $dst/"
 }
 
 # ============================================================================
@@ -81,42 +83,50 @@ curl -L https://dmtrkovalenko.dev/install-fff-mcp.sh | bash
 # ============================================================================
 # Shell dotfiles
 # ============================================================================
-info "Linking shell dotfiles..."
-link "$DOTFILES/.zshrc" "$HOME/.zshrc"
-link "$DOTFILES/.zshenv" "$HOME/.zshenv"
-link "$DOTFILES/.zprofile" "$HOME/.zprofile"
-link "$DOTFILES/.fzf.zsh" "$HOME/.fzf.zsh"
-link "$DOTFILES/.gitconfig" "$HOME/.gitconfig"
+info "Copying shell dotfiles..."
+for f in .zshrc .zshenv .zprofile .fzf.zsh .gitconfig; do
+    copy_file "$DOTFILES/$f" "$HOME/$f"
+done
 
 # ============================================================================
 # XDG config dirs
 # ============================================================================
-info "Linking XDG configs..."
+info "Copying XDG configs..."
 mkdir -p "$HOME/.config"
 
-configs=(
-    bat
-    gh
-    ghostty
-    git
-    karabiner
-    lazygit
-    marimo
-    nvim
-    yazi
-    zed
-)
-
+configs=(bat gh ghostty git karabiner lazygit marimo nvim yazi zed)
 for dir in "${configs[@]}"; do
-    link "$DOTFILES/.config/$dir" "$HOME/.config/$dir"
+    copy_dir "$DOTFILES/.config/$dir" "$HOME/.config/$dir"
 done
 
 # Standalone config files
-link "$DOTFILES/.config/starship.toml" "$HOME/.config/starship.toml"
+copy_file "$DOTFILES/.config/starship.toml" "$HOME/.config/starship.toml"
 
 # macOS key bindings
-mkdir -p "$HOME/Library/KeyBindings"
-link "$DOTFILES/.config/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
+copy_file "$DOTFILES/.config/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
+
+# ============================================================================
+# Claude Code config
+# ============================================================================
+CLAUDE_REPO="$DOTFILES/.claude"
+CLAUDE_DIR="$HOME/.claude"
+
+info "Pushing Claude config from repo -> $CLAUDE_DIR"
+for f in CLAUDE.md settings.json trim-superpowers.sh; do
+    [[ -f "$CLAUDE_REPO/$f" ]] && copy_file "$CLAUDE_REPO/$f" "$CLAUDE_DIR/$f"
+done
+[[ -d "$CLAUDE_REPO/commands" ]] && copy_dir "$CLAUDE_REPO/commands" "$CLAUDE_DIR/commands"
+[[ -f "$CLAUDE_DIR/trim-superpowers.sh" ]] && chmod +x "$CLAUDE_DIR/trim-superpowers.sh"
+
+# Install plugins
+if [[ -f "$CLAUDE_REPO/plugins.txt" ]]; then
+    info "Installing Claude plugins from plugins.txt"
+    while IFS=' ' read -r name version; do
+        [[ -z "$name" || "$name" == "#"* ]] && continue
+        info "  installing $name (v$version)..."
+        claude plugin install "$name" 2>/dev/null || warn "  failed to install $name"
+    done <"$CLAUDE_REPO/plugins.txt"
+fi
 
 # ============================================================================
 # Neovim bootstrap
