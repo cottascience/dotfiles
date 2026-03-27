@@ -1,0 +1,78 @@
+# Performance
+scan_timeout = 10
+command_timeout = 500
+
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[\\$](bold red)"
+
+[battery]
+disabled = false
+full_symbol = "🔋 "
+charging_symbol = "⚡️ "
+discharging_symbol = "🔌 "
+
+[nodejs]
+disabled = false
+symbol = "⬢ "
+
+[python]
+symbol = " "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[rust]
+symbol = " "
+
+[docker_context]
+symbol = " "
+format = "via [$symbol$context]($style) "
+
+[kubernetes]
+disabled = false
+symbol = "⎈ "
+
+[aws]
+disabled = false
+symbol = "  "
+format = '[$symbol($profile )(\($region\) )]($style)'
+
+[username]
+style_user = "blue bold"
+style_root = "red bold"
+format = "[$user]($style)@"
+disabled = true
+
+[hostname]
+ssh_only = true
+format = "[$hostname]($style):"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[time]
+disabled = true
+format = "[$time]($style) "
+time_format = "%R"
+
+[git_branch]
+symbol = " "
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+conflicted = "⚔️ "
+ahead = "🚀 "
+behind = "🐢 "
+diverged = "🔀 "
+untracked = "🛤️ "
+stashed = "📦 "
+modified = "📝 "
+staged = "✅ "
+deleted = "🗑️ "
+style = "bold purple"
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration]($style) "
+style = "yellow bold"

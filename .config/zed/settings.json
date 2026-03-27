@@ -1,0 +1,212 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "diagnostics": {
+    "lsp_pull_diagnostics": {
+      "enabled": false,
+    },
+  },
+  "enable_language_server": false,
+  "use_on_type_format": false,
+  "preferred_line_length": 100,
+  "vertical_scroll_margin": 3,
+  "scroll_beyond_last_line": "one_page",
+  "show_completion_documentation": true,
+  "completion_documentation_secondary_query_debounce": 50,
+  "buffer_font_family": "JetBrains Mono Nerd Font",
+  "buffer_font_features": {
+    "calt": true,
+    "liga": true,
+    "dlig": true,
+  },
+  "auto_update_extensions": {
+    "kanagawa-themes": false,
+  },
+  "auto_signature_help": true,
+  "agent": {
+    "default_profile": "write",
+    "always_allow_tool_actions": true,
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest",
+    },
+    "inline_assistant_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-5",
+    },
+    "model_parameters": [],
+  },
+  "ssh_connections": [
+    {
+      "host": "hpc",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/home/cottal"],
+        },
+        {
+          "paths": ["/mnt/lfs/cottal/ai-lab"],
+        },
+        {
+          "paths": ["/mnt/lfs/cottal/ai-lab/projects/pjfm"],
+        },
+        {
+          "paths": ["/mnt/lfs/cottal/ai-lab/sandbox/lcotta/biofm/scaling_laws"],
+        },
+        {
+          "paths": ["/mnt/lfs/cottal/ai-lab/sandbox/lcotta/libs"],
+        },
+        {
+          "paths": ["/mnt/lfs/cottal/ai-lab/sandbox/lcotta/ttlm"],
+        },
+      ],
+    },
+    {
+      "host": "ash",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/home/cottal/ai-lab/projects/pjfm"],
+        },
+      ],
+    },
+  ],
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_multiline_find": true,
+    "toggle_relative_line_numbers": true,
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha",
+  },
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": false,
+  },
+  "base_keymap": "Cursor",
+  "minimap": {
+    "show": "auto",
+  },
+  "autosave": "on_window_change",
+  "file_types": {},
+  "soft_wrap": "editor_width",
+  "remove_trailing_whitespace_on_save": true,
+  "ensure_final_newline_on_save": true,
+  "preview_tabs": {
+    "enabled": true,
+    "enable_preview_from_file_finder": true,
+  },
+  "ui_font_size": 12,
+  "buffer_font_size": 12,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha - No Italics",
+  },
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": true,
+  },
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false,
+  },
+  "project_panel": {
+    "button": true,
+    "dock": "left",
+    "git_status": true,
+  },
+  "outline_panel": {
+    "button": true,
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    "button": false,
+  },
+  "notification_panel": {
+    "button": false,
+  },
+  "chat_panel": {
+    "button": "never",
+  },
+  "format_on_save": "on",
+  "tab_size": 4,
+  "hard_tabs": false,
+  "show_whitespaces": "selection",
+  "show_edit_predictions": true,
+  "inlay_hints": {
+    "enabled": true,
+  },
+  "cursor_blink": true,
+  "theme_overrides": {
+    "Catppuccin Mocha - No Italics": {
+      "editor.background": "#1a1a24",
+      "editor.gutter.background": "#1a1a24",
+      "terminal.background": "#1a1a24",
+      "panel.background": "#1a1a24",
+      "tab_bar.background": "#1a1a24",
+      "toolbar.background": "#1a1a24",
+    },
+  },
+  "experimental.theme_overrides": {
+    "players": [
+      {
+        "cursor": "#8400ff",
+      },
+    ],
+  },
+  "scrollbar": {
+    "show": "auto",
+  },
+  "gutter": {
+    "line_numbers": true,
+    "code_actions": true,
+    "folds": true,
+    "runnables": true,
+  },
+  "relative_line_numbers": "enabled",
+  "git": {
+    "git_gutter": "tracked_files",
+    "inline_blame": {
+      "enabled": true,
+      "delay_ms": 600,
+    },
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "tabs": {
+    "git_status": true,
+  },
+  "terminal": {
+    "font_family": "JetBrains Mono Nerd Font",
+    "font_size": 12,
+    "blinking": "terminal_controlled",
+    "line_height": "comfortable",
+  },
+  "languages": {
+    "Python": {
+      "format_on_save": "on",
+      "formatter": "language_server",
+    },
+    "Rust": {
+      "format_on_save": "on",
+    },
+    "JavaScript": {
+      "format_on_save": "on",
+    },
+    "TypeScript": {
+      "format_on_save": "on",
+    },
+  },
+}
