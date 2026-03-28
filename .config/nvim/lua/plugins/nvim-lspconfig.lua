@@ -97,6 +97,16 @@ return {
       jsonls = {},
       -- YAML
       yamlls = {},
+      -- LaTeX
+      texlab = {},
+      -- TOML
+      taplo = {},
+      -- Markdown
+      marksman = {},
+      -- C/C++
+      clangd = {},
+      -- Bash
+      bashls = {},
       -- Lua (for Neovim config)
       lua_ls = {
         settings = {

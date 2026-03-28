@@ -17,6 +17,14 @@ return {
       -- Lua
       "lua-language-server",
       "stylua",
+      -- Markdown
+      "marksman",
+      -- C/C++
+      "clangd",
+      -- Bash
+      "bash-language-server",
+      -- LaTeX
+      "texlab",
     },
   },
 }
