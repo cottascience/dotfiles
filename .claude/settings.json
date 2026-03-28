@@ -1,6 +1,8 @@
 {
   "permissions": {
-    "allow": ["Bash(rg *)"]
+    "allow": [
+      "Bash(rg *)"
+    ]
   },
   "statusLine": {
     "type": "command",
@@ -18,12 +20,21 @@
         "source": "github",
         "repo": "Lum1104/Understand-Anything"
       }
+    },
+    "osgrep": {
+      "source": {
+        "source": "github",
+        "repo": "Ryandonofrio3/osgrep"
+      }
     }
   },
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
   "spinnerVerbs": {
     "mode": "append",
-    "verbs": ["Putting the Brazilian sauce", "Brazilian.building"]
-  }
+    "verbs": [
+      "Putting the Brazilian sauce",
+      "Brazilian.building"
+    ]
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high"
 }

@@ -4,7 +4,10 @@ return {
   dependencies = "kevinhwang91/promise-async",
   event = "VeryLazy",
   opts = {
-    provider_selector = function()
+    provider_selector = function(_, filetype)
+      if filetype == "latex" or filetype == "tex" then
+        return { "indent" }
+      end
       return { "treesitter", "indent" }
     end,
   },

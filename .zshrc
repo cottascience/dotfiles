@@ -154,7 +154,3 @@ alias rrm='rm -rf'
 # ENVIRONMENT VARIABLES
 # ============================================================================
 export CLAUDE_CODE_SYNTAX_HIGHLIGHT="Catppuccin Mocha"
-
-# Remote sync utility
-alias remsync-ash='remsync ~/ai-lab ash:~/ai-lab -avz --exclude=".git" --exclude="biofm" --exclude="__pycache__" --exclude="sandbox" --exclude="node_modules" --exclude=".venv"'
-
