@@ -32,7 +32,7 @@ opt.number = true
 opt.clipboard = "unnamedplus"
 
 -- Cursor (matching Zed: cursor_shape="block", cursor_blink=true)
-opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250"
+opt.guicursor = "n-c:block,v:hor20,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250"
 
 -- Whitespace (matching Zed: remove_trailing_whitespace_on_save=true)
 vim.api.nvim_create_autocmd("BufWritePre", {

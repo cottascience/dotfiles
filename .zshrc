@@ -92,14 +92,24 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
-unset -f zle-keymap-select 2>/dev/null
+# Cursor shape: block=normal, beam=insert
+function zle-keymap-select {
+  case $KEYMAP in
+    vicmd)      printf '\e[2 q' ;;
+    viins|main) printf '\e[6 q' ;;
+  esac
+}
+zle -N zle-keymap-select
+
+function zle-line-init { printf '\e[6 q' }
+zle -N zle-line-init
 
 # ============================================================================
 # SHELL PLUGINS & INTEGRATIONS
 # ============================================================================
 
 # Replace completion with fzf
-source $(brew --prefix)/share/fzf-tab/fzf-tab.plugin.zsh
+source $(brew --prefix)/share/fzf-tab/fzf-tab.zsh
 
 # Auto-suggestions
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh

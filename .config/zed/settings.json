@@ -82,6 +82,9 @@
     "use_system_clipboard": "always",
     "use_multiline_find": true,
     "toggle_relative_line_numbers": true,
+    "normal_cursor_shape": "block",
+    "insert_cursor_shape": "bar",
+    "visual_cursor_shape": "underline",
   },
   "icon_theme": {
     "mode": "system",

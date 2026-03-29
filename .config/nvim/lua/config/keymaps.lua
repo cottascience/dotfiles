@@ -11,6 +11,9 @@ keymap({ "n", "v" }, "S", "}", { noremap = true, desc = "Paragraph forward" })
 keymap({ "n", "v" }, "Q", "0", { noremap = true, desc = "Start of line" })
 keymap({ "n", "v" }, "E", "$", { noremap = true, desc = "End of line" })
 
+-- Toggle comment in visual mode (mirrors Ctrl+/ from VS Code/JetBrains)
+keymap("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
+
 -- Insert mode save command (stays in insert mode)
 keymap("i", "<C-q>", "<C-o>:w<CR>", { noremap = true, desc = "Save file" })
 
