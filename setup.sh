@@ -63,7 +63,7 @@ fi
 # Brewfile
 # ============================================================================
 info "Installing Brewfile packages..."
-brew bundle install --file="$DOTFILES/Brewfile" --no-lock
+brew bundle install --file="$DOTFILES/Brewfile"
 
 # ============================================================================
 # Claude Code (requires node from Brewfile)
