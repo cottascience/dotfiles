@@ -57,6 +57,8 @@ done
 
 # Standalone config files
 copy_file "$HOME/.config/starship.toml" "$DOTFILES/.config/starship.toml"
+# Tmux config
+copy_file "$HOME/.tmux.conf" "$DOTFILES/.tmux.conf"
 
 # macOS key bindings
 copy_file "$HOME/Library/KeyBindings/DefaultKeyBinding.dict" "$DOTFILES/.config/KeyBindings/DefaultKeyBinding.dict"
@@ -94,7 +96,7 @@ tmpfile="$(mktemp)"
 brew bundle dump --file="$tmpfile"
 # Keep lines from existing Brewfile that brew won't dump (cargo, npm, uv, etc.)
 if [[ -f "$brewfile" ]]; then
-    grep -vE '^(tap |brew |cask )' "$brewfile" >> "$tmpfile" || true
+    grep -vE '^(tap |brew |cask )' "$brewfile" >>"$tmpfile" || true
 fi
 mv "$tmpfile" "$brewfile"
 info "dumped Brewfile (preserved manual entries)"
