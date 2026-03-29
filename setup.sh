@@ -66,6 +66,12 @@ info "Installing Brewfile packages..."
 brew bundle install --file="$DOTFILES/Brewfile"
 
 # ============================================================================
+# npm packages (requires node from Brewfile)
+# ============================================================================
+info "Installing npm packages..."
+npm install -g osgrep pnpm
+
+# ============================================================================
 # Claude Code (requires node from Brewfile)
 # ============================================================================
 if ! command -v claude &>/dev/null; then
