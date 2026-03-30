@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */Users/lcotta/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}/Users/lcotta/.fzf/bin"
+if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
 fi
 
 source <(fzf --zsh)
