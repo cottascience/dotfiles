@@ -3,7 +3,8 @@
 ```sh
 git clone git@github.com:lcotta/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./setup.sh    # push configs to a new machine
+./setup.sh    # push configs to a new local machine (full setup)
+./setup.sh --remote [HOST_NAME] # push configs to a new remote machine (minimal non-sudo setup)
 ./pull.sh     # pull configs from a running machine
 ```
 
