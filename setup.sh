@@ -227,6 +227,9 @@ if [[ -f "$CLAUDE_REPO/plugins.txt" ]]; then
         claude plugin install "$name" 2>/dev/null || warn "  failed to install $name"
     done <"$CLAUDE_REPO/plugins.txt"
 fi
+info "Done installing Claude plugins"
+rtk init -g
+info "Done initializing rtk for Claude"
 
 # ============================================================================
 # Neovim bootstrap
