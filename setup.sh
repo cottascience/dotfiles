@@ -34,18 +34,28 @@ if [[ "${1:-}" == "--remote" ]]; then
     HOST="${2:?Usage: setup.sh --remote <host>}"
     info "Setting up remote host: $HOST"
 
+    # Platform-specific configs from remote/
     info "Syncing dotfiles..."
-    rsync -az "$DOTFILES/.zshrc" "$DOTFILES/.zshenv" "$DOTFILES/.tmux.conf" "$HOST":~/
-    ssh "$HOST" 'mkdir -p ~/.config ~/.config/bat'
+    rsync -az "$DOTFILES/remote/.zshrc" "$DOTFILES/remote/.tmux.conf" "$HOST":~/
+
+    # .zshenv with guarded sourcing
+    ssh "$HOST" 'cat > ~/.zshenv' <<'ZSHENV'
+export XDG_CONFIG_HOME=$HOME/.config
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+ZSHENV
+
+    # Empty .zprofile — no brew/rbenv on Linux
+    ssh "$HOST" 'printf "# remote — no platform-specific login setup\n" > ~/.zprofile'
+
+    # Shared configs
+    ssh "$HOST" 'mkdir -p ~/.config/bat'
     rsync -az "$DOTFILES/.config/starship.toml" "$HOST":~/.config/
     rsync -az "$DOTFILES/.config/bat/config" "$HOST":~/.config/bat/
     rsync -az --delete \
         --exclude '.git' \
         --exclude 'lazy-lock.json' \
         "$DOTFILES/.config/nvim/" "$HOST":~/.config/nvim/
-
-    # Linux .zprofile — no brew/rbenv
-    ssh "$HOST" 'printf "# remote — no platform-specific login setup\n" > ~/.zprofile'
 
     info "Installing tools on $HOST..."
     ssh -t "$HOST" 'bash -s' <<'REMOTE'
