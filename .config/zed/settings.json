@@ -42,41 +42,7 @@
     },
     "model_parameters": [],
   },
-  "ssh_connections": [
-    {
-      "host": "hpc",
-      "args": [],
-      "projects": [
-        {
-          "paths": ["/home/cottal"],
-        },
-        {
-          "paths": ["/mnt/lfs/cottal/ai-lab"],
-        },
-        {
-          "paths": ["/mnt/lfs/cottal/ai-lab/projects/pjfm"],
-        },
-        {
-          "paths": ["/mnt/lfs/cottal/ai-lab/sandbox/lcotta/biofm/scaling_laws"],
-        },
-        {
-          "paths": ["/mnt/lfs/cottal/ai-lab/sandbox/lcotta/libs"],
-        },
-        {
-          "paths": ["/mnt/lfs/cottal/ai-lab/sandbox/lcotta/ttlm"],
-        },
-      ],
-    },
-    {
-      "host": "ash",
-      "args": [],
-      "projects": [
-        {
-          "paths": ["/home/cottal/ai-lab/projects/pjfm"],
-        },
-      ],
-    },
-  ],
+  "ssh_connections": [],
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "always",
