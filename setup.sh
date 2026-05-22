@@ -148,10 +148,10 @@ fi
 if ! command -v rustup &>/dev/null; then
     info "Installing Rust via rustup..."
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-    . "$HOME/.cargo/env"
 else
     info "Rust already installed"
 fi
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # ============================================================================
 # uv
@@ -162,12 +162,22 @@ if ! command -v uv &>/dev/null; then
 else
     info "uv already installed"
 fi
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
 # ============================================================================
 # Brewfile
 # ============================================================================
 info "Installing Brewfile packages..."
 brew bundle install --file="$DOTFILES/Brewfile"
+
+# tdf is not published to crates.io, so Brewfile's cargo integration cannot
+# install it by package name.
+if ! command -v tdf &>/dev/null; then
+    info "Installing tdf..."
+    cargo install --git https://github.com/itsjunetime/tdf.git
+else
+    info "tdf already installed"
+fi
 
 # ============================================================================
 # npm packages (requires node from Brewfile)
@@ -229,16 +239,33 @@ done
 [[ -f "$CLAUDE_DIR/trim-superpowers.sh" ]] && chmod +x "$CLAUDE_DIR/trim-superpowers.sh"
 
 # Install plugins
+info "Configuring Claude plugin marketplaces"
+while IFS=' ' read -r name source; do
+    [[ -z "$name" || "$name" == "#"* ]] && continue
+    marketplaces="$(claude plugin marketplace list 2>/dev/null || true)"
+    if grep -q "$name" <<<"$marketplaces"; then
+        info "  marketplace $name already configured"
+    else
+        info "  adding marketplace $name..."
+        claude plugin marketplace add "$source" || warn "  failed to add marketplace $name"
+    fi
+done <<'MARKETPLACES'
+claude-plugins-official anthropics/claude-plugins-official
+understand-anything Lum1104/Understand-Anything
+claude-hud jarrodwatts/claude-hud
+osgrep Ryandonofrio3/osgrep
+MARKETPLACES
+
 if [[ -f "$CLAUDE_REPO/plugins.txt" ]]; then
     info "Installing Claude plugins from plugins.txt"
     while IFS=' ' read -r name version; do
         [[ -z "$name" || "$name" == "#"* ]] && continue
         info "  installing $name (v$version)..."
-        claude plugin install "$name" 2>/dev/null || warn "  failed to install $name"
+        claude plugin install "$name" || warn "  failed to install $name"
     done <"$CLAUDE_REPO/plugins.txt"
 fi
 info "Done installing Claude plugins"
-rtk init -g
+rtk init -g --auto-patch
 info "Done initializing rtk for Claude"
 
 # ============================================================================
