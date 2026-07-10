@@ -66,8 +66,6 @@ brew "tree-sitter"
 brew "neovim"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
-# Oracle Cloud Infrastructure CLI
-brew "oci-cli"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Sliding, tiling window manager for MacOS
