@@ -160,7 +160,29 @@ alias -g C='| pbcopy'
 # Easier rm -rf
 alias rrm='rm -rf'
 
+# md-to-pdf; --raw disables the Octarine [[wikilink]]/.attachments handling.
+# Serves the target file's git repo root as basedir so relative image paths that
+# climb above the md file (../../assets/x.png) still resolve; explicit --basedir wins.
+md-to-pdf() {
+  local raw=0 basedir_set=0 args=()
+  local a; for a in "$@"; do
+    case "$a" in
+      --raw) raw=1 ;;
+      --basedir|--basedir=*) basedir_set=1; args+=("$a") ;;
+      *) args+=("$a") ;;
+    esac
+  done
+  local extra=()
+  if (( ! basedir_set )); then
+    local target="${args[-1]:-}" ctx=.
+    [[ -f "$target" ]] && ctx=$(dirname "$target")
+    local root; root=$(git -C "$ctx" rev-parse --show-toplevel 2>/dev/null) && extra=(--basedir "$root")
+  fi
+  MD_TO_PDF_RAW=$raw command md-to-pdf --config-file "$HOME/.config/md-to-pdf/config.js" --launch-options '{ "args": ["--allow-file-access-from-files"] }' "${extra[@]}" "${args[@]}"
+}
+
 # ============================================================================
 # ENVIRONMENT VARIABLES
 # ============================================================================
 export CLAUDE_CODE_SYNTAX_HIGHLIGHT="Catppuccin Mocha"
+export RAY_ADDRESS=http://localhost:8265

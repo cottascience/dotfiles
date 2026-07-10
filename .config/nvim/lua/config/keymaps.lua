@@ -17,6 +17,11 @@ keymap("v", "<C-/>", "gc", { remap = true, desc = "Toggle comment" })
 -- Insert mode save command (stays in insert mode)
 keymap("i", "<C-q>", "<C-o>:w<CR>", { noremap = true, desc = "Save file" })
 
+-- Close the current buffer without tearing down the window layout
+keymap("n", "<C-q>", function()
+  Snacks.bufdelete()
+end, { desc = "Delete Buffer" })
+
 -- keymap for replacing the word under the cursor (current file only)
 keymap("n", "<leader>s*", [[:%s/\<<c-r><c-w>\>/]], {
   desc = "replace word under cursor (current file)",
@@ -145,3 +150,8 @@ end, {
   noremap = true,
   silent = true,
 })
+
+-- Toggle LSP inlay hints (off by default; heavy in big-venv projects)
+keymap("n", "<leader>uh", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle inlay hints" })

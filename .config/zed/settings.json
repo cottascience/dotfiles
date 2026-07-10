@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
   "diagnostics": {
     "lsp_pull_diagnostics": {
       "enabled": false,
@@ -76,11 +81,7 @@
   },
   "ui_font_size": 12,
   "buffer_font_size": 12,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Catppuccin Mocha - No Italics",
-  },
+  "theme": "Catppuccin Mocha - No Italics",
   "toolbar": {
     "breadcrumbs": true,
     "quick_actions": true,

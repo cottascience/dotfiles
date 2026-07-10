@@ -1,6 +1,10 @@
 .DS_Store
 **/.DS_Store
 CLAUDE.md
+!.claude/CLAUDE.md
 .claude/settings.local.json
 .osgrep/
 .osgrep
+# machine-local noise
+.config/zed/prompts/
+.config/karabiner/automatic_backups/

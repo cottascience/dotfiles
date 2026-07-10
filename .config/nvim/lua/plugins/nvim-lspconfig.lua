@@ -122,7 +122,7 @@ return {
       },
     },
     inlay_hints = {
-      enabled = true, -- matching Zed: inlay_hints.enabled=true
+      enabled = false, -- off by default: hints force basedpyright type-resolution per render -> UI jank in big-venv projects. toggle: <leader>uh
     },
   },
 }

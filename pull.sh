@@ -30,7 +30,12 @@ sync_dir() {
     local src="$1" dst="$2"
     if [[ -d "$src" ]]; then
         mkdir -p "$dst"
-        rsync -a --delete "$src/" "$dst/"
+        # exclude machine-local noise (zed prompt db, karabiner backups, empty theme dirs)
+        rsync -a --delete \
+            --exclude 'automatic_backups/' \
+            --exclude 'prompts/' \
+            --exclude 'themes/' \
+            "$src/" "$dst/"
         info "synced $src/"
     else
         warn "skip $src/ (not found)"
@@ -50,15 +55,13 @@ echo ""
 # XDG config dirs
 # ============================================================================
 echo "XDG configs"
-configs=(bat gh ghostty git karabiner lazygit marimo nvim yazi zed)
+configs=(bat gh ghostty git k9s karabiner lazygit marimo md-to-pdf nvim paneru yazi zed)
 for dir in "${configs[@]}"; do
     sync_dir "$HOME/.config/$dir" "$DOTFILES/.config/$dir"
 done
 
 # Standalone config files
 copy_file "$HOME/.config/starship.toml" "$DOTFILES/.config/starship.toml"
-# Tmux config
-copy_file "$HOME/.tmux.conf" "$DOTFILES/.tmux.conf"
 
 # macOS key bindings
 copy_file "$HOME/Library/KeyBindings/DefaultKeyBinding.dict" "$DOTFILES/.config/KeyBindings/DefaultKeyBinding.dict"
@@ -71,7 +74,7 @@ echo "Claude config"
 CLAUDE_DIR="$HOME/.claude"
 CLAUDE_REPO="$DOTFILES/.claude"
 
-for f in CLAUDE.md settings.json trim-superpowers.sh; do
+for f in CLAUDE.md RTK.md settings.json; do
     copy_file "$CLAUDE_DIR/$f" "$CLAUDE_REPO/$f"
 done
 
@@ -90,16 +93,18 @@ echo ""
 # Brewfile
 # ============================================================================
 echo "Brewfile"
-# brew bundle dump only captures tap/brew/cask — merge with manual entries
+# brew bundle dump captures tap/brew/cask/cargo/uv/npm — merge with any manual
+# entries it can't know about (tools not installed via brew)
 brewfile="$DOTFILES/Brewfile"
 tmpfile="$(mktemp)"
 brew bundle dump --file="$tmpfile"
-# Keep lines from existing Brewfile that brew won't dump (cargo, npm, uv, etc.)
 if [[ -f "$brewfile" ]]; then
-    grep -vE '^(tap |brew |cask )' "$brewfile" >>"$tmpfile" || true
+    grep -vE '^(tap |brew |cask |#)' "$brewfile" >>"$tmpfile" || true
 fi
-mv "$tmpfile" "$brewfile"
-info "dumped Brewfile (preserved manual entries)"
+# drop exact duplicates, keep first occurrence (dump now emits cargo/uv/npm too)
+awk '!seen[$0]++' "$tmpfile" >"$brewfile"
+rm -f "$tmpfile"
+info "dumped Brewfile (preserved manual entries, deduped)"
 echo ""
 
 echo "Done. Review changes with: git diff"

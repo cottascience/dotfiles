@@ -43,6 +43,7 @@ if [[ "${1:-}" == "--remote" ]]; then
 export XDG_CONFIG_HOME=$HOME/.config
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+[ -f "$HOME/.zshenv.local" ] && . "$HOME/.zshenv.local"
 ZSHENV
 
     # Empty .zprofile — no brew/rbenv on Linux
@@ -180,12 +181,6 @@ else
 fi
 
 # ============================================================================
-# npm packages (requires node from Brewfile)
-# ============================================================================
-info "Installing npm packages..."
-npm install -g osgrep pnpm
-
-# ============================================================================
 # Claude Code (requires node from Brewfile)
 # ============================================================================
 if ! command -v claude &>/dev/null; then
@@ -214,7 +209,7 @@ done
 info "Copying XDG configs..."
 mkdir -p "$HOME/.config"
 
-configs=(bat gh ghostty git karabiner lazygit marimo nvim yazi zed)
+configs=(bat gh ghostty git k9s karabiner lazygit marimo md-to-pdf nvim paneru yazi zed)
 for dir in "${configs[@]}"; do
     copy_dir "$DOTFILES/.config/$dir" "$HOME/.config/$dir"
 done
@@ -232,11 +227,10 @@ CLAUDE_REPO="$DOTFILES/.claude"
 CLAUDE_DIR="$HOME/.claude"
 
 info "Pushing Claude config from repo -> $CLAUDE_DIR"
-for f in CLAUDE.md settings.json trim-superpowers.sh; do
+for f in CLAUDE.md RTK.md settings.json; do
     [[ -f "$CLAUDE_REPO/$f" ]] && copy_file "$CLAUDE_REPO/$f" "$CLAUDE_DIR/$f"
 done
 [[ -d "$CLAUDE_REPO/commands" ]] && copy_dir "$CLAUDE_REPO/commands" "$CLAUDE_DIR/commands"
-[[ -f "$CLAUDE_DIR/trim-superpowers.sh" ]] && chmod +x "$CLAUDE_DIR/trim-superpowers.sh"
 
 # Install plugins
 info "Configuring Claude plugin marketplaces"
@@ -254,6 +248,8 @@ claude-plugins-official anthropics/claude-plugins-official
 understand-anything Lum1104/Understand-Anything
 claude-hud jarrodwatts/claude-hud
 osgrep Ryandonofrio3/osgrep
+caveman JuliusBrussee/caveman
+ponytail DietrichGebert/ponytail
 MARKETPLACES
 
 if [[ -f "$CLAUDE_REPO/plugins.txt" ]]; then
@@ -282,6 +278,9 @@ echo -e "${BOLD}${GREEN}Setup complete.${RESET}"
 echo ""
 echo "Optional manual installs:"
 echo "  - Anaconda/Miniconda → https://docs.conda.io/en/latest/miniconda.html"
-echo "  - MacTeX             → https://tug.org/mactex/"
+echo ""
+echo "Manual steps (not tracked in this public repo):"
+echo "  - Copy ~/.ssh keys and any ~/.zshenv.local (machine-specific env)"
+echo "  - Authenticate: gh auth login, claude login"
 echo ""
 echo "Open a new terminal to load the shell config."
