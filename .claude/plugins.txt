@@ -1,6 +1,0 @@
-osgrep@osgrep 0.4.3
-claude-hud@claude-hud 0.1.0
-clangd-lsp@claude-plugins-official 1.0.0
-understand-anything@understand-anything 2.7.4
-caveman@caveman 25d22f864ad6
-ponytail@ponytail 4.7.0

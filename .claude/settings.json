@@ -38,6 +38,12 @@
         "repo": "Lum1104/Understand-Anything"
       }
     },
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    },
     "osgrep": {
       "source": {
         "source": "github",
@@ -65,7 +71,7 @@
     ]
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "skipWorkflowUsageWarning": true,
   "theme": "auto"
 }

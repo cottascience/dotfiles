@@ -122,15 +122,14 @@ CLAUDE_REPO="$DOTFILES/.claude"
 CLAUDE_DIR="$HOME/.claude"
 
 info "Pushing Claude config from repo -> $CLAUDE_DIR"
-for f in CLAUDE.md RTK.md settings.json; do
+for f in CLAUDE.md settings.json; do
     [[ -f "$CLAUDE_REPO/$f" ]] && copy_file "$CLAUDE_REPO/$f" "$CLAUDE_DIR/$f"
 done
-[[ -d "$CLAUDE_REPO/commands" ]] && copy_dir "$CLAUDE_REPO/commands" "$CLAUDE_DIR/commands"
+[[ -d "$CLAUDE_REPO/skills" ]] && copy_dir "$CLAUDE_REPO/skills" "$CLAUDE_DIR/skills"
 
-# Install plugins
+# Install marketplaces and plugins declared in settings.json
 info "Configuring Claude plugin marketplaces"
-while IFS=' ' read -r name source; do
-    [[ -z "$name" || "$name" == "#"* ]] && continue
+while IFS=$'\t' read -r name source; do
     marketplaces="$(claude plugin marketplace list 2>/dev/null || true)"
     if grep -q "$name" <<<"$marketplaces"; then
         info "  marketplace $name already configured"
@@ -138,23 +137,28 @@ while IFS=' ' read -r name source; do
         info "  adding marketplace $name..."
         claude plugin marketplace add "$source" || warn "  failed to add marketplace $name"
     fi
-done <<'MARKETPLACES'
-claude-plugins-official anthropics/claude-plugins-official
-understand-anything Lum1104/Understand-Anything
-claude-hud jarrodwatts/claude-hud
-osgrep Ryandonofrio3/osgrep
-caveman JuliusBrussee/caveman
-ponytail DietrichGebert/ponytail
-MARKETPLACES
+done < <(
+    jq -r '
+        .extraKnownMarketplaces // {}
+        | to_entries[]
+        | select(.value.source.source == "github")
+        | [.key, .value.source.repo]
+        | @tsv
+    ' "$CLAUDE_REPO/settings.json"
+)
 
-if [[ -f "$CLAUDE_REPO/plugins.txt" ]]; then
-    info "Installing Claude plugins from plugins.txt"
-    while IFS=' ' read -r name version; do
-        [[ -z "$name" || "$name" == "#"* ]] && continue
-        info "  installing $name (v$version)..."
-        claude plugin install "$name" || warn "  failed to install $name"
-    done <"$CLAUDE_REPO/plugins.txt"
-fi
+info "Installing enabled Claude plugins"
+while IFS= read -r plugin; do
+    info "  installing $plugin..."
+    claude plugin install "$plugin" || warn "  failed to install $plugin"
+done < <(
+    jq -r '
+        .enabledPlugins // {}
+        | to_entries[]
+        | select(.value == true)
+        | .key
+    ' "$CLAUDE_REPO/settings.json"
+)
 info "Done installing Claude plugins"
 rtk init -g --auto-patch
 info "Done initializing rtk for Claude"
