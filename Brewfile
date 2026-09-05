@@ -2,7 +2,6 @@ tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git"
 tap "cloudflare/cloudflare"
 tap "felixkratz/formulae"
 tap "homebrew-zathura/zathura"
-tap "karinushka/paneru"
 tap "mutagen-io/mutagen"
 tap "nikitabobko/tap"
 tap "tw93/tap"
@@ -68,8 +67,6 @@ brew "neovim"
 brew "node"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
-# Sliding, tiling window manager for MacOS
-brew "paneru"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # PDF converter to SVG

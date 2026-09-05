@@ -104,7 +104,7 @@ done
 info "Copying XDG configs..."
 mkdir -p "$HOME/.config"
 
-configs=(bat gh ghostty git k9s karabiner lazygit marimo md-to-pdf nvim paneru yazi zed)
+configs=(bat gh ghostty git k9s karabiner lazygit marimo md-to-pdf nvim yazi zed)
 for dir in "${configs[@]}"; do
     copy_dir "$DOTFILES/.config/$dir" "$HOME/.config/$dir"
 done

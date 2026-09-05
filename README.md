@@ -6,7 +6,7 @@ cd ~/dotfiles
 ./setup.sh                      # push configs to a new local machine (full setup)
 ```
 
-neovim, zed, ghostty, starship, karabiner, lazygit, yazi, bat, k9s, paneru,
+neovim, zed, ghostty, starship, karabiner, lazygit, yazi, bat, k9s,
 claude code (+ rtk, osgrep, caveman, ponytail), codex. catppuccin mocha
 everywhere, `#1a1a24` background.
 
