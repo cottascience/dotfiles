@@ -128,8 +128,6 @@ cask "github"
 cask "jordanbaird-ice"
 # Keyboard customiser
 cask "karabiner-elements"
-# Generate images from LaTeX equations
-cask "klatexformula"
 # Full TeX Live distribution with GUI applications
 cask "mactex"
 # Move and resize windows using keyboard shortcuts or snap areas
