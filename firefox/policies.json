@@ -1,0 +1,22 @@
+{
+  "policies": {
+    "Extensions": {
+      "Install": [
+        "https://addons.mozilla.org/firefox/downloads/latest/tridactyl-vim/latest.xpi",
+        "https://addons.mozilla.org/firefox/downloads/latest/styl-us/latest.xpi",
+        "https://addons.mozilla.org/firefox/downloads/latest/refined-github-/latest.xpi"
+      ]
+    },
+    "SearchEngines": {
+      "Add": [
+        { "Name": "GitHub", "Alias": "@gh", "URLTemplate": "https://github.com/search?q={searchTerms}" },
+        { "Name": "Hugging Face", "Alias": "@hf", "URLTemplate": "https://huggingface.co/models?search={searchTerms}" },
+        { "Name": "arXiv", "Alias": "@ax", "URLTemplate": "https://arxiv.org/search/?query={searchTerms}&searchtype=all" },
+        { "Name": "Google Scholar", "Alias": "@gs", "URLTemplate": "https://scholar.google.com/scholar?q={searchTerms}" },
+        { "Name": "MDN", "Alias": "@mdn", "URLTemplate": "https://developer.mozilla.org/en-US/search?q={searchTerms}" },
+        { "Name": "PyPI", "Alias": "@pypi", "URLTemplate": "https://pypi.org/search/?q={searchTerms}" },
+        { "Name": "crates.io", "Alias": "@crates", "URLTemplate": "https://crates.io/search?q={searchTerms}" }
+      ]
+    }
+  }
+}

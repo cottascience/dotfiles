@@ -1,0 +1,98 @@
+/* ============================================================================
+   Page-level styling: new tab, reader mode, about: pages, scrollbars.
+   Same palette as userChrome.css.
+   ========================================================================== */
+
+/* Thin scrollbars on every page */
+:root {
+  scrollbar-color: #45475a transparent;
+}
+
+/* No white flash on blank tabs */
+@-moz-document url("about:blank") {
+  html {
+    background: #1a1a24 !important;
+  }
+}
+
+/* Tridactyl owns the new tab page: wallpaper + prompt, nothing else.
+   wallpaper.jpg is dotfiles/custom_background.jpg, copied by setup.sh. */
+@-moz-document regexp("moz-extension://.*/static/newtab\\.html.*") {
+  html {
+    background: #1a1a24 url("wallpaper.jpg") center / cover no-repeat fixed !important;
+  }
+  body {
+    background: rgba(17, 17, 27, 0.55) !important;
+    min-height: 100vh;
+    margin: 0 !important;
+    display: grid !important;
+    place-items: center;
+  }
+  body > * {
+    display: none !important;
+  }
+  body::after {
+    content: "~ $ o_";
+    font: bold 28px "JetBrainsMono Nerd Font", "JetBrainsMono NF", monospace;
+    color: #cdd6f4;
+    letter-spacing: 1px;
+    padding: 14px 28px;
+    border: 1px solid #8400ff;
+    border-radius: 8px;
+    background: rgba(26, 26, 36, 0.85);
+    box-shadow: 0 0 40px rgba(132, 0, 255, 0.35);
+  }
+}
+
+/* Reader mode: Mocha + Fraunces headings + Lora body */
+@-moz-document url-prefix("about:reader") {
+  body {
+    background-color: #1a1a24 !important;
+    color: #cdd6f4 !important;
+  }
+  .moz-reader-content,
+  .moz-reader-content p {
+    font-family: "Lora", serif !important;
+    line-height: 1.7 !important;
+  }
+  .reader-title,
+  .moz-reader-content h1,
+  .moz-reader-content h2,
+  .moz-reader-content h3 {
+    font-family: "Fraunces", serif !important;
+    color: #cba6f7 !important;
+  }
+  .moz-reader-content a {
+    color: #89b4fa !important;
+  }
+  .moz-reader-content pre,
+  .moz-reader-content code {
+    font-family: "JetBrainsMono Nerd Font", monospace !important;
+    background: #11111b !important;
+  }
+  ::selection {
+    background: #353749;
+  }
+}
+
+/* about:config, about:preferences, about:addons, ... */
+@-moz-document url-prefix("about:config"), url-prefix("about:preferences"),
+  url-prefix("about:addons"), url-prefix("about:support"),
+  url-prefix("about:policies"), url-prefix("about:profiles") {
+  :root {
+    --in-content-page-background: #1a1a24 !important;
+    --in-content-page-color: #cdd6f4 !important;
+    --in-content-box-background: #15151d !important;
+    --in-content-box-border-color: #313244 !important;
+    --in-content-table-background: #15151d !important;
+    --background-color-canvas: #1a1a24 !important;
+    --background-color-box: #15151d !important;
+    --text-color: #cdd6f4 !important;
+    --color-accent-primary: #cba6f7 !important;
+    --color-accent-primary-hover: #b4befe !important;
+    --font-family-system: "JetBrainsMono Nerd Font", "JetBrainsMono NF", monospace !important;
+  }
+  body {
+    font-family: "JetBrainsMono Nerd Font", "JetBrainsMono NF", monospace !important;
+  }
+}
