@@ -147,9 +147,9 @@ export TERM=xterm-256color
 # ============================================================================
 
 # Directory listing with eza
-alias ls="eza --icons"
-alias ll="eza -l --icons"
-alias la="eza -la --icons"
+alias ls="eza --icons=auto"
+alias ll="eza -l --icons=auto"
+alias la="eza -la --icons=auto"
 
 # Prettier commands
 alias cat="bat"

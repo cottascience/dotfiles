@@ -61,7 +61,7 @@ fullscreen = false
 # ============================================================================
 # macOS SPECIFIC
 # ============================================================================
-macos-titlebar-style = tabs
+macos-titlebar-style = transparent
 macos-icon = custom
 macos-custom-icon = ~/.config/ghostty/Ghostty Catppuccin Mocha.icns
 
