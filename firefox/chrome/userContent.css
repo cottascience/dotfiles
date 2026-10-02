@@ -96,3 +96,12 @@
     font-family: "JetBrainsMono Nerd Font", "JetBrainsMono NF", monospace !important;
   }
 }
+
+/* Gmail compose: the Catppuccin style darkens the box, but typed text keeps
+   Gmail's inline default color (black). Only affects what you see while
+   writing; sent mail keeps its own formatting. */
+@-moz-document domain("mail.google.com") {
+  .Am :not(a) {
+    color: inherit !important;
+  }
+}
