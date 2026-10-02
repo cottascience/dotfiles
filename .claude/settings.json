@@ -6,6 +6,10 @@
     ]
   },
   "model": "claude-fable-5[1m]",
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "hooks": {
     "PreToolUse": [
       {
