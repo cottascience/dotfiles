@@ -197,11 +197,3 @@ menupopup > menu[_moz-menuactive] {
   background: var(--m-sel);
   color: var(--m-text);
 }
-
-/* ---------------------------------------------------------------- sidebar */
-/* Ctrl+Z toggles the launcher between collapsed and expanded. Expanded is
-   repurposed as "hidden", so the shortcut flips icons <-> nothing. */
-#sidebar-container:has(> sidebar-main[expanded]),
-#browser:has(sidebar-main[expanded]) > #sidebar-launcher-splitter {
-  display: none !important;
-}
