@@ -39,7 +39,7 @@ user_pref("browser.uidensity", 1);
 user_pref("widget.macos.native-context-menus", false); // lets userChrome.css theme menus
 user_pref("sidebar.revamp", true);
 user_pref("sidebar.verticalTabs", true);
-user_pref("sidebar.visibility", "hide-sidebar"); // Ctrl+Z hides/shows the whole sidebar
+user_pref("sidebar.visibility", "always-show"); // Ctrl+Z: icons <-> hidden (see userChrome.css)
 user_pref("sidebar.animation.enabled", false);
 user_pref("layout.css.prefers-color-scheme.content-override", 0); // dark sites
 user_pref("devtools.theme", "dark");
