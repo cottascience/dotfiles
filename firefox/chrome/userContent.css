@@ -105,14 +105,14 @@
     color: inherit !important;
   }
 
-  /* "N new" pills on Promotions/Social tabs: light pill, light text.
-     The pill sits inside the label element, so only the label's own text
-     stays light; every element nested in the tab goes dark. */
-  .aAy .aKz {
-    color: #cdd6f4 !important;
+  /* "N new" pill (.aDG) on Promotions/Social tabs. Catppuccin's icon rule
+     (.aAy > div { filter }) also hits the .aKw wrapper holding label + pill,
+     washing the pill out. Unfilter the wrapper and theme the pill. */
+  .aAy > .aKw {
+    filter: none !important;
   }
-  .aAy .aKz *,
-  .aAy .aKx > :not(.aKz) {
+  .aAy .aDG {
+    background-color: #cba6f7 !important;
     color: #11111b !important;
   }
 
