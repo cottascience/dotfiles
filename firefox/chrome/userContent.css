@@ -106,13 +106,14 @@
   }
 
   /* "N new" pills on Promotions/Social tabs: light pill, light text.
-     Darken everything in the tab except the label. */
-  .aAy * {
-    color: #11111b !important;
-  }
-  .aAy .aKz,
-  .aAy .aKz * {
+     The pill sits inside the label element, so only the label's own text
+     stays light; every element nested in the tab goes dark. */
+  .aAy .aKz {
     color: #cdd6f4 !important;
+  }
+  .aAy .aKz *,
+  .aAy .aKx > :not(.aKz) {
+    color: #11111b !important;
   }
 
   /* Formatting toggle (Aa) when pressed: Catppuccin's icon filter also
