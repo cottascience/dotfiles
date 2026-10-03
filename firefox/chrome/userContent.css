@@ -104,4 +104,24 @@
   .Am :not(a) {
     color: inherit !important;
   }
+
+  /* "N new" pills on Promotions/Social tabs: light pill, light text.
+     Darken everything in the tab except the label. */
+  .aAy * {
+    color: #11111b !important;
+  }
+  .aAy .aKz,
+  .aAy .aKz * {
+    color: #cdd6f4 !important;
+  }
+
+  /* Formatting toggle (Aa) when pressed: Catppuccin's icon filter also
+     washes out its highlight, leaving light-on-light. */
+  .btC [aria-pressed="true"] {
+    filter: none !important;
+    background-color: #cba6f7 !important;
+  }
+  .btC [aria-pressed="true"] * {
+    filter: none !important;
+  }
 }
