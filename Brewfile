@@ -95,6 +95,8 @@ brew "tmux"
 brew "tree-sitter-cli"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Image processing library
+brew "vips"
 # Convert HTML to PDF
 brew "weasyprint"
 # Utilities to create and convert Web Open Font File (WOFF) files
