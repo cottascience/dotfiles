@@ -122,8 +122,6 @@ cask "font-lora"
 cask "font-merriweather"
 cask "font-fraunces"
 cask "font-symbols-only-nerd-font"
-# Web browser (configured from firefox/ by setup.sh)
-cask "firefox", args: { adopt: true }
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
 # Desktop client for GitHub repositories

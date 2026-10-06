@@ -30,6 +30,10 @@
     "liga": true,
     "dlig": true,
   },
+  "auto_install_extensions": {
+    "catppuccin": true,
+    "catppuccin-icons": true,
+  },
   "auto_update_extensions": {
     "kanagawa-themes": false,
   },
